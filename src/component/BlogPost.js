@@ -5,7 +5,7 @@ import { getBlogPost } from '../services/blogPostServices'
 import { useParams } from 'react-router'
 
 export const BlogPost = (props) => {
-  // const {post} = props
+  const {blogPosts} = props
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -13,11 +13,11 @@ export const BlogPost = (props) => {
   console.log(useParams());
 
   useEffect(() => {
-    getBlogPost(id)
+    getBlogPost(blogPosts, id)
       .then(post => setPost(post))
       .catch(error => console.log(error))
       .finally(() => setLoading(false))
-  },[id])
+  },[id, blogPosts])
   
   if(!post){
     return loading ? (<p>Loading...</p>) : (<p>Oops, couldn't find your post.</p>)

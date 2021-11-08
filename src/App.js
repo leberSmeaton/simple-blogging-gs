@@ -5,6 +5,7 @@ import { GlobalStyle } from './styled-components/globalStyles';
 import { BlogPost } from './component/BlogPost';
 import BlogPosts from './component/BlogPosts';
 import { NewBlogPost } from './component/NewBlogPost';
+import NavBar from './component/NavBar';
 
 const App = () => {
   const [ blogPosts, setBlogPosts ] = useState([]);
@@ -15,7 +16,7 @@ const App = () => {
       .then(posts => {
         console.log(posts)
         setBlogPosts(posts)}
-        )
+      )
       .catch(error => console.log(error))
       .finally(() => setLoading(false))
   },[])
@@ -32,11 +33,12 @@ const App = () => {
     <>
       <GlobalStyle />
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Navigate to="/posts" />} />
           <Route path="/posts" element={<BlogPosts loading={loading} posts={blogPosts} />} />
           <Route path="/posts/new" element={<NewBlogPost addNewBlogPost={addNewBlogPost} />} />
-          <Route path="/posts/:id" element={<BlogPost />} />
+          <Route path="/posts/:id" element={<BlogPost blogPosts={blogPosts} />} />
         </Routes>
       </BrowserRouter>
     </>
