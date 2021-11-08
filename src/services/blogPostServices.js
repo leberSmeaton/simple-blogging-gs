@@ -24,8 +24,13 @@ const getNextId = () => {
 export const createNewPost = (postObject) => {
   const newPost = {
     ...postObject,
-    updated_at: Date.now()
+    updated_at: Date.now(),
+    id: getNextId()
   }
 
-  
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(newPost)
+    }, 500)
+  })
 }

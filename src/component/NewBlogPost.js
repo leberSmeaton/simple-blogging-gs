@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
 import { Block, Label, Input, InputButton, TextArea} from '../styled-components/index'
 
 export const NewBlogPost = (props) => {
+  const navigate = useNavigate();
 
   const initialState = {
     title: "",
@@ -21,7 +23,8 @@ export const NewBlogPost = (props) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formState);
+    addNewBlogPost(formState);
+    navigate("/");
   }
   
   return (
@@ -30,20 +33,22 @@ export const NewBlogPost = (props) => {
       <form id="newPostForm" onSubmit={handleSubmit}>
         <Block>
           <Label>Title</Label>
-          <Input type="text" name="title" placeholder="enter title" value={formState.title}></Input>
+          <Input type="text" name="title" placeholder="enter title" value={formState.title} onChange={handleChange}></Input>
         </Block>
         <Block>
           <Label>Category</Label>
-          <Input type="text" name="category" placeholder="enter category" value={formState.category}></Input>
+          <Input type="text" name="category" placeholder="enter category" value={formState.category} onChange={handleChange}></Input>
         </Block>
         <Block>
           <Label>Content</Label>
-          <TextArea from="newPostForm" type="text" name="content" placeholder="enter text" value={formState.content}></TextArea>
+          <TextArea from="newPostForm" type="text" name="content" placeholder="enter text" value={formState.content} onChange={handleChange}></TextArea>
         </Block>
         <Block>
-          <InputButton type="submit" value="Add Post" onChange={handleChange}/>
+          <InputButton type="submit" value="Add Post" />
         </Block>
       </form>
     </div>
   )
 }
+
+export default NewBlogPost;

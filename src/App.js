@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { createNewPost, getBlogPosts } from './services/blogPostServices';
 import { GlobalStyle } from './styled-components/globalStyles';
-import { 
-  BrowserRouter, 
-  Routes, 
-  Route,
-  Navigate
-} from 'react-router-dom';
-import BlogPosts from './component/BlogPosts';
 import { BlogPost } from './component/BlogPost';
+import BlogPosts from './component/BlogPosts';
 import { NewBlogPost } from './component/NewBlogPost';
 
 const App = () => {
@@ -26,9 +21,11 @@ const App = () => {
   },[])
 
   function addNewBlogPost(postObject){
-    createNewPost(postObject)
-    .then(newPost => setBlogPosts([...blogPosts, newPost]))
-    .catch(error => console.log(error))
+    setLoading(true)
+      createNewPost(postObject)
+        .then(newPost => setBlogPosts([...blogPosts, newPost]))
+        .catch(error => console.log(error))
+        .finally(() => setLoading(false));
   }
 
   return (
@@ -37,7 +34,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/posts" />} />
-          <Route path="/post" element={<BlogPosts loading={loading} posts={blogPosts} />} />
+          <Route path="/posts" element={<BlogPosts loading={loading} posts={blogPosts} />} />
           <Route path="/posts/new" element={<NewBlogPost addNewBlogPost={addNewBlogPost} />} />
           <Route path="/posts/:id" element={<BlogPost />} />
         </Routes>

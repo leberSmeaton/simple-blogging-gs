@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { capitalize } from '../utils/stringUtils'
 import Moment from 'react-moment'
+import { capitalize } from '../utils/stringUtils'
 import { getBlogPost } from '../services/blogPostServices'
 import { useParams } from 'react-router'
 
 export const BlogPost = (props) => {
   // const {post} = props
-  const [post,setPost] = useState(null)
+  const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
 
   const { id } = useParams()
@@ -14,31 +14,21 @@ export const BlogPost = (props) => {
 
   useEffect(() => {
     getBlogPost(id)
-    .then(post => setPost(post))
-    .catch(error => console.log(error))
-    .finally(setLoading(false))
-  },[])
+      .then(post => setPost(post))
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false))
+  },[id])
   
-  if(!post && loading){
-    return(
-      <p>Loading...</p>
-    )
-  }
-
-  if(!post && !loading){
-    return(
-      <p>Oops, couldn't find your post.</p>
-    )
+  if(!post){
+    return loading ? (<p>Loading...</p>) : (<p>Oops, couldn't find your post.</p>)
   }
 
   return (
-    <div>
-      <>
-        <h1>{post.title}</h1>
-        <h3>{capitalize(post.category)}</h3>
-        <Moment fromNow>{post.updated_at}</Moment>
-        <p>{post.content}</p>
-      </>
-    </div>
+    <>
+      <h1>{post.title}</h1>
+      <Moment fromNow>{post.updated_at}</Moment>
+      <h3>{capitalize(post.category)}</h3>
+      <p>{post.content}</p>
+    </>
   )
 }
