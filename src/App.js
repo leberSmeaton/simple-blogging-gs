@@ -15,6 +15,7 @@ const App = () => {
   const [ store, dispatch ] = useReducer(stateReducer, initialState);
   // const [ blogPosts, setBlogPosts ] = useState([]);
   const [ loading, setLoading ] = useState(true);
+  
   const {blogPosts} = store;
 
   useEffect(() => {
