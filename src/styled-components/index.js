@@ -31,7 +31,7 @@ export const Card = styled.div`
     border-radius: 10px;
     transition: box-shadow 0.3s;
     &:hover {
-        box-shadow: 0 0 11px rgba(33,33,33,.2)
+        box-shadow: 0 0 11px rgba(33,33,33,.6)
     }
     @media (max-width: 768px) {
      flex: 0 1 49%
@@ -88,8 +88,21 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
     margin: 1em;
     padding: .2em .5em;
-    color: blue;
+    color: darkslategray;
     &:hover{
         color: orange;
+        text-decoration: underline dotted #ff8c00;
+    }
+`
+
+export const StyledFooterLink = styled(Link)`
+    font-size: 1em;
+    text-decoration: none;
+    margin: 3em 1em 1em;
+    padding: .2em .5em;
+    color: darkslategray;
+    &:hover{
+        color: orange;
+        text-decoration: underline dotted #ff8c00;
     }
 `

@@ -6,6 +6,7 @@ import { BlogPost } from './component/BlogPost';
 import BlogPosts from './component/BlogPosts';
 import { NewBlogPost } from './component/NewBlogPost';
 import NavBar from './component/NavBar';
+import Footer from './component/Footer';
 import stateReducer from './config/stateReducer';
 import initialState from './config/initialState';
 import { StateContext } from './config/store';
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/posts/new" element={<NewBlogPost addNewBlogPost={addNewBlogPost} />} />
             <Route path="/posts/:id" element={<BlogPost blogPosts={blogPosts} />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </StateContext.Provider>
     </>
