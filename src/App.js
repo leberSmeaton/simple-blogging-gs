@@ -14,8 +14,11 @@ import { StateContext } from './config/store';
 
 const App = () => {
   const [ store, dispatch ] = useReducer(stateReducer, initialState);
-  // const [ blogPosts, setBlogPosts ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
+  
+  /* 
+  // We might choose to use a loading state globally but we'll do it in combination of local and global states.
+
+  const [ loading, setLoading ] = useState(true); 
   
   const {blogPosts} = store;
 
@@ -36,6 +39,8 @@ const App = () => {
         .catch(error => console.log(error))
         .finally(() => setLoading(false));
   }
+  */ 
+
 
   
   return (
@@ -46,9 +51,9 @@ const App = () => {
           <NavBar />
           <Routes>
             <Route path="/" element={<Navigate to="/posts" />} />
-            <Route path="/posts" element={<BlogPosts loading={loading} posts={blogPosts} />} />
-            <Route path="/posts/new" element={<NewBlogPost addNewBlogPost={addNewBlogPost} />} />
-            <Route path="/posts/:id" element={<BlogPost blogPosts={blogPosts} />} />
+            <Route path="/posts" element={<BlogPosts />} />
+            <Route path="/posts/new" element={<NewBlogPost />} />
+            <Route path="/posts/:id" element={<BlogPost />} />
           </Routes>
           <Footer />
         </BrowserRouter>
